@@ -1,0 +1,40 @@
+[tool.poetry]
+name = "coc-gen"
+version = "0.1.0"
+description = ""
+authors = ["jens persson <jens@persson.cx>"]
+readme = "README.md"
+packages = [{ include = "coc_gen", from = "src" }]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+faker = "^25.3.0"
+click = "^8.1.7"
+
+
+[tool.poetry.group.dev.dependencies]
+black = "^24.4.2"
+pre-commit = "^3.7.1"
+isort = "^5.13.2"
+pep8 = "^1.7.1"
+flake8 = "^7.0.0"
+flake8-simplify = "^0.21.0"
+flake8-comprehensions = "^3.15.0"
+flake8-bugbear = "^24.4.26"
+pytest = "^8.2.1"
+pylint = "^3.2.5"
+
+[tool.poetry.scripts]
+investigator = 'coc_gen.investigator:cli'
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.pylint.main]
+jobs = 0
+py-version = "3.11"
+suggestion-mode = true
+
+[tool.pylint."messages control"]
+disable = ["fixme", "line-too-long"]
