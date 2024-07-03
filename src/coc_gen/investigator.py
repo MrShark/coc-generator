@@ -108,6 +108,6 @@ class Investigator:
 @click.option("--sex", default=None, help="The sex of the investigator.")
 @click.option("--occupation", default=None, help="The occupation of the investigator.")
 def cli(locale, number, sex, occupation):
-    """Generate Call of Cthulhu investogators."""
+    """Generate Call of Cthulhu investigators."""
     for _ in range(number):
         print(Investigator(locale=locale, sex=sex, occupation=occupation))
