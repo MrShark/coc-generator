@@ -11,6 +11,7 @@
 
 [![CodeQL](https://github.com/MrShark/coc-generator/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/MrShark/coc-generator/actions/workflows/github-code-scanning/codeql)
 [![Deploy documentation](https://github.com/MrShark/coc-generator/actions/workflows/publish_doc.yaml/badge.svg)](https://github.com/MrShark/coc-generator/actions/workflows/publish_doc.yaml)
+[![Python package](https://github.com/MrShark/coc-generator/actions/workflows/python-package.yml/badge.svg)](https://github.com/MrShark/coc-generator/actions/workflows/python-package.yml)
 
 For the time beeing rather basic.
 
