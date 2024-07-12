@@ -7,7 +7,7 @@ readme = "README.md"
 packages = [{ include = "coc_gen", from = "src" }]
 
 [tool.poetry.dependencies]
-python = "^3.11"
+python = "^3.9"
 faker = "^25.3.0"
 click = "^8.1.7"
 
