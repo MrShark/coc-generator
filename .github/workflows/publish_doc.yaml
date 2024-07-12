@@ -24,8 +24,8 @@ env:
   BUILD_PATH: "." # default value when not using subfolders
 
 jobs:
-  build:
-    name: Build
+  build_doc:
+    name: Build Documentation
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -57,13 +57,13 @@ jobs:
         with:
           path: ${{ env.BUILD_PATH }}/docs/_build
 
-  deploy:
+  deploy_doc:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    needs: build
+    needs: build_doc
     runs-on: ubuntu-latest
-    name: Deploy
+    name: Deploy Documentation
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
