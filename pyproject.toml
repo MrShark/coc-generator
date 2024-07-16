@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "coc-gen"
-version = "0.1.0"
+version = "0.2.0"
 description = ""
 authors = ["jens persson <jens@persson.cx>"]
 readme = "README.md"
@@ -28,7 +28,7 @@ sphinx-click = "^6.0.0"
 sphinx-autodoc-typehints = "^2.2.2"
 
 [tool.poetry.scripts]
-investigator = 'coc_gen.investigator:cli'
+investigator = 'coc_gen.cli:investigator'
 
 [build-system]
 requires = ["poetry-core"]

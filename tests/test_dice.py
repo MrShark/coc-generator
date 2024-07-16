@@ -4,7 +4,7 @@ from random import randint
 
 import pytest
 
-from coc_gen.dice import roll
+from coc_gen.utils.dice import roll
 
 
 @pytest.mark.parametrize(
