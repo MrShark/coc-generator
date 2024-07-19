@@ -109,6 +109,9 @@ class SkillValue:
             return NotImplemented
         return self.value < other.value
 
+    def __repr__(self) -> str:
+        return f"{self.value}"
+
 
 class Occupation:
     """
@@ -158,11 +161,15 @@ class Occupation:
         Returns:
             int -- the calculated skill points
         """
-        skill_points = 0
-        for term in self.skill_points.split("+"):
-            bv, factor = term.split("×")
-            skill_points += basevalues[bv] * int(factor)
-        return skill_points
+        skill_points = []
+        for alt in self.skill_points.split("|"):
+            sp = 0
+            for term in alt.split("+"):
+                bv, factor = term.split("×")
+                sp += basevalues[bv] * int(factor)
+            skill_points.append(sp)
+
+        return max(skill_points)
 
     def get_skill_instance(self) -> list[Skill]:
         """
