@@ -21,7 +21,7 @@ def roll(dice: str) -> int:
     else:
         addition = 0
 
-    count, sides = [int(v) for v in dice.split("D")]
+    count, sides = (int(v) for v in dice.split("D"))
 
     val = 0
     for _ in range(count):
