@@ -86,18 +86,18 @@ class SkillValue:
     def __add__(self, other):
         if hasattr(other, "value"):
             return self.__class__(self.skill, self.value + other.value)
-        elif isinstance(other, (int, float)):
+        if isinstance(other, (int, float)):
             return self.__class__(self.skill, self.value + int(other))
-        else:
-            raise TypeError("Unsupported operand type(s) for +")
+
+        raise TypeError("Unsupported operand type(s) for +")
 
     def __sub__(self, other):
         if hasattr(other, "value"):
             return self.__class__(self.skill, self.value - other.value)
-        elif isinstance(other, (int, float)):
+        if isinstance(other, (int, float)):
             return self.__class__(self.skill, self.value - int(other))
-        else:
-            raise TypeError("Unsupported operand type(s) for -")
+
+        raise TypeError("Unsupported operand type(s) for -")
 
     def __eq__(self, other):
         if not hasattr(other, "value"):

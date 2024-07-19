@@ -1,3 +1,5 @@
+"""Rulesets for Call of ­Cthulhu clasic and modern"""
+
 from coc_gen.base_classes import Investigator, Occupation
 from coc_gen.coc_eng.occupations import occupations_20s_data, occupations_modern_data
 from coc_gen.coc_eng.skills import skills_20s, skills_modern
@@ -57,6 +59,10 @@ special_skills_modern = {
 
 
 class TwentiesOccupation(Occupation):
+    """
+    An Occupation in the Classic setting
+    """
+
     _skills = skills_20s
     _special_skills = special_skills_20s
     _basevalues = basevalues
@@ -83,6 +89,8 @@ class TwentiesInvestigator(Investigator):
 
 
 class ModernOccupation(Occupation):
+    """An Occupation in a modern setting"""
+
     _skills = skills_modern
     _special_skills = special_skills_modern
     _basevalues = basevalues

@@ -1,4 +1,4 @@
-"""Rules for Call of ­Cthulhu Sverige"""
+"""Ruleset for Call of ­Cthulhu Sverige"""
 
 from coc_gen.base_classes import Investigator, Occupation
 
