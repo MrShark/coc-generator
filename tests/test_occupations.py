@@ -2,7 +2,7 @@
 
 import pytest
 
-from coc_gen.data.occupations import Occupation
+from coc_gen.base_classes import Occupation
 
 
 @pytest.mark.parametrize(

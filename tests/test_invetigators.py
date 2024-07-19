@@ -1,11 +1,11 @@
 """Test of investigators"""
 
-from coc_gen import investigator
+from coc_gen import get_investgator_class
 
 
 def test_coc_char():
     """Very basic tests of investigator creation"""
-    char = investigator.Investigator()
+    char = get_investgator_class("coc_swe")()
 
     assert isinstance(char.name, str)
     assert 15 <= char.STY <= 90
