@@ -6,14 +6,14 @@ from .occupations import occupations_data
 from .skills import skills
 
 basevalues = {
-    "STY": ("3D6"),
     "FYS": ("3D6"),
-    "STO": ("2D6+6"),
-    "SMI": ("3D6"),
-    "KAR": ("3D6"),
     "INT": ("2D6+6"),
-    "VST": ("3D6"),
+    "KAR": ("3D6"),
+    "SMI": ("3D6"),
+    "STO": ("2D6+6"),
+    "STY": ("3D6"),
     "UTB": ("2D6+6"),
+    "VST": ("3D6"),
 }
 
 special_skills = {

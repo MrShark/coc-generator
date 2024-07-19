@@ -47,7 +47,7 @@ for s in (
     Skill("Konst & hantverk (Sprängteknik)", "5%"),
     Skill("Konst & hantverk (Sömnad)", "5%"),
     Skill("Konst & hantverk (Tekniska Ritningar)", "5%"),
-    Skill("Konst & hantverk (valfritt instrument)", "5%"),
+    Skill("Konst & hantverk (Valfritt Instrument)", "5%"),
     Skill("Levnadsstandard", "0%"),
     Skill("Lyssna", "20%"),
     Skill("Låssmed", "1%"),

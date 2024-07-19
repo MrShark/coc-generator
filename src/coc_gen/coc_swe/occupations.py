@@ -504,7 +504,7 @@ occupations_data = {
         "skill_points": "UTB×2+KAR×2",
         "credit_range": (9, 30),
         "skills": (
-            "Konst & hantverk (valfritt instrument)",
+            "Konst & hantverk (Valfritt Instrument)",
             "Lyssna",
             "Psykologi",
             "SOCIAL",
