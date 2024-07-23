@@ -1,3 +1,5 @@
+"""A list of occupations for Call ­Cthulhu Sverige"""
+
 occupations_data = {
     "Agitator": {
         "skill_points": "UTB×2+KAR×2",

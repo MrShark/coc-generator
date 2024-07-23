@@ -28,5 +28,5 @@ def get_investgator_class(ruleset: str) -> Investigator:
         return TwentiesInvestigator
     if ruleset == "coc_modern":
         return ModernInvestigator
-    else:
-        raise NotImplementedError
+
+    raise NotImplementedError
