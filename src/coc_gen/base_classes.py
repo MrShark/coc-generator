@@ -232,9 +232,10 @@ class Investigator:
             self.name = name
         else:
             if self.sex == "F":
-                self.name = self.fake.name_female()
+                self.name = f"{self.fake.first_name_female()} {self.fake.last_name()}"
             else:
-                self.name = self.fake.name_male()
+                self.name = f"{self.fake.first_name_male()} {self.fake.last_name()}"
+            # TODO this does not work in locales dont follow the first/last naming convention
 
         if basevalues is None:
             basevalues = {}
