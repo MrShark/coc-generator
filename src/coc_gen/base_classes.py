@@ -100,14 +100,18 @@ class SkillValue:
         raise TypeError("Unsupported operand type(s) for -")
 
     def __eq__(self, other):
-        if not hasattr(other, "value"):
-            return NotImplemented
-        return self.value == other.value
+        if isinstance(other, (int, float)):
+            return self.value == other
+        if hasattr(other, "value"):
+            return self.value == other.value
+        return NotImplemented
 
     def __lt__(self, other):
-        if not hasattr(other, "value"):
-            return NotImplemented
-        return self.value < other.value
+        if isinstance(other, (int, float)):
+            return self.value < other
+        if hasattr(other, "value"):
+            return self.value < other.value
+        return NotImplemented
 
     def __repr__(self) -> str:
         return f"{self.value}"
@@ -207,7 +211,13 @@ class Investigator:
     _basevalues = {}
 
     def __init__(
-        self, locale=None, sex=None, name=None, basevalues=None, occupation=None
+        self,
+        locale=None,
+        sex=None,
+        name=None,
+        basevalues=None,
+        occupation=None,
+        skills=None,
     ) -> None:
         """
         Create an Investigator
@@ -240,30 +250,37 @@ class Investigator:
         if basevalues is None:
             basevalues = {}
         self.basevalues = {}
+
         for val, roll in self._basevalues.items():
-            self.basevalues[val] = basevalues.get(val, dice.roll(roll)) * 5
+            self.basevalues[val] = basevalues.get(val, dice.roll(roll) * 5)
 
         if occupation:
             self.occupation = self._occupations[occupation]
         else:
             self.occupation = choice(list(self._occupations.values()))
 
-        skill_points = self.occupation.calc_skillpoint(self.basevalues)
-        credit_val = randint(*self.occupation.credit_range)
-        credit = self.occupation._skills[self._credit_rating].get_value(credit_val)
-        self.skills = {self._credit_rating: credit}
-        skill_points -= credit_val
+        if not skills:
+            skill_points = self.occupation.calc_skillpoint(self.basevalues)
+            credit_val = randint(*self.occupation.credit_range)
+            credit = self.occupation._skills[self._credit_rating].get_value(credit_val)
+            self.skills = {self._credit_rating: credit}
+            skill_points -= credit_val
 
-        for skill in self.occupation.get_skill_instance():
-            curr_value = skill.instance_value(self.basevalues)
-            addition = randint(0, min(90 - curr_value.value, skill_points))
-            skill_points -= addition
-            self.skills[skill.name] = curr_value + addition
+            for skill in self.occupation.get_skill_instance():
+                curr_value = skill.instance_value(self.basevalues)
+                addition = randint(0, min(90 - curr_value.value, skill_points))
+                skill_points -= addition
+                self.skills[skill.name] = curr_value + addition
 
-        while skill_points:
-            skill = choice(list(self.skills.keys()))
-            self.skills[skill] += 1
-            skill_points -= 1
+            while skill_points:
+                skill = choice(list(self.skills.keys()))
+                if self.skills[skill] < 100:
+                    self.skills[skill] += 1
+                    skill_points -= 1
+        else:
+            self.skills = {}
+            for skill, value in skills.items():
+                self.skills[skill] = value
 
     def __getattr__(self, name: str) -> Any:
         if name in self.basevalues:
@@ -278,3 +295,24 @@ class Investigator:
     occupation = '{self.occupation.name}',
     skills = '{self.skills}',
 )"""
+
+    @property
+    def as_dict(self) -> dict:
+        investigator = {
+            "sex": self.sex,
+            "name": self.name,
+            "basevalues": self.basevalues,
+            "occupation": self.occupation.name,
+            "skills": self.skills,
+        }
+        return investigator
+
+    @classmethod
+    def from_dict(cls, d: dict) -> "Investigator":
+        return cls(
+            sex=d["sex"],
+            name=d["name"],
+            basevalues=d["basevalues"],
+            occupation=d["occupation"],
+            skills=d["skills"],
+        )
