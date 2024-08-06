@@ -207,6 +207,7 @@ class Investigator:
     """
 
     _occupations: list[Occupation] = {}
+    _skills = {}
     _credit_rating = "Credit Rating"
     _basevalues = {}
 
@@ -280,7 +281,7 @@ class Investigator:
         else:
             self.skills = {}
             for skill, value in skills.items():
-                self.skills[skill] = value
+                self.skills[skill] = SkillValue(self._skills[skill], value)
 
     def __getattr__(self, name: str) -> Any:
         if name in self.basevalues:

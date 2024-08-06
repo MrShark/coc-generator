@@ -71,5 +71,6 @@ class SweInvestigator(Investigator):
     """
 
     _occupations = occupations
+    _skills = skills
     _basevalues = basevalues
     _credit_rating = "Levnadsstandard"

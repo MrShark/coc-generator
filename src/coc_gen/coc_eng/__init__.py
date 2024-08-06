@@ -84,6 +84,7 @@ class TwentiesInvestigator(Investigator):
     """
 
     _occupations = occupations_20s
+    _skills = skills_20s
     _basevalues = basevalues
     _credit_rating = "Credit Rating"
 
@@ -112,6 +113,7 @@ class ModernInvestigator(Investigator):
     """
 
     _occupations = occupations_modern
+    _skills = skills_modern
     _basevalues = basevalues
     _credit_rating = "Credit Rating"
 
