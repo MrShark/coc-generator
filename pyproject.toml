@@ -5,6 +5,8 @@ description = ""
 authors = ["jens persson <jens@persson.cx>"]
 readme = "README.md"
 packages = [{ include = "coc_gen", from = "src" }]
+requires-python = ">=3.9"
+
 
 [tool.poetry.dependencies]
 python = "^3.9"
@@ -13,19 +15,14 @@ click = "^8.1.7"
 
 
 [tool.poetry.group.dev.dependencies]
-black = "^24.8.0"
 pre-commit = "^3.8.0"
-isort = "^5.13.2"
 pep8 = "^1.7.1"
-flake8 = "^7.1.1"
-flake8-simplify = "^0.21.0"
-flake8-comprehensions = "^3.15.0"
-flake8-bugbear = "^24.4.26"
 pytest = "^8.3.2"
 pylint = "^3.2.6"
 sphinx = "^7.4.7"
 sphinx-click = "^6.0.0"
 sphinx-autodoc-typehints = "^2.2.3"
+ruff = "^0.5.7"
 
 [tool.poetry.scripts]
 investigator = 'coc_gen.cli:investigator'
@@ -34,10 +31,26 @@ investigator = 'coc_gen.cli:investigator'
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
-[tool.pylint.main]
-jobs = 0
-py-version = "3.11"
-suggestion-mode = true
+[tool.ruff]
+line-length = 120
 
-[tool.pylint."messages control"]
-disable = ["fixme", "line-too-long"]
+[tool.ruff.lint]
+select = ["ALL"]
+ignore = [
+    "S311",  # This is not crypto code
+    "FIX",   # To do annotations are allowed
+    "TD002", # To do annotations are allowed
+    "TD003", # To do annotations are allowed
+    "COM",   # Not recomended with auto formating
+    "D206",  # Not recomended with auto formating
+    "D300",  # Not recomended with auto formating
+    "E111",  # Not recomended with auto formating
+    "E114",  # Not recomended with auto formating
+    "E117",  # Not recomended with auto formating
+    "ISC",   # Not recomended with auto formating
+    "Q",     # Not recomended with auto formating
+    "W191",  # Not recomended with auto formating
+]
+allowed-confusables = ["×"]
+[tool.ruff.lint.pydocstyle]
+convention = "google"

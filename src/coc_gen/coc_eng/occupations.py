@@ -1,6 +1,5 @@
-"""Lists of occupations for Classic and Modern settings"""
+"""Lists of occupations for Classic and Modern settings."""
 
-# pylint: disable=too-many-lines
 occupations_base = {
     "Accountant": {
         "skill_points": "EDU×4",

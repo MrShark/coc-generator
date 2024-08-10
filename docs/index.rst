@@ -22,6 +22,6 @@ For now only source installation is supported and `poetry <https://python-poetry
 Usage
 -----
 
-.. click:: coc_gen.investigator:cli
+.. click:: coc_gen.cli:investigator
     :prog: investigator
     :nested: full

@@ -1,6 +1,4 @@
-"""
-Lists all skills and their base values
-"""
+"""Lists all skills and their base values."""
 
 from coc_gen.base_classes import Skill
 

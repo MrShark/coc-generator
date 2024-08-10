@@ -1,7 +1,12 @@
+"""Test Skill related classes."""
+
+# ruff: noqa: S101, PLR2004
+
 from coc_gen.base_classes import Skill, SkillValue
 
 
-def test_skill():
+def test_skill() -> None:
+    """Test the Skill class."""
     skill = Skill("test", "10%")
     value = skill.instance_value({})
 
@@ -10,7 +15,8 @@ def test_skill():
     assert value.value == 10
 
 
-def test_value_add():
+def test_value_add() -> None:
+    """Test the SkillValue class."""
     skill = Skill("test", "10%")
     value1 = SkillValue(skill, 10)
     value2 = SkillValue(skill, 15)

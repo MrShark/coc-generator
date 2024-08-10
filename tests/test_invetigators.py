@@ -1,12 +1,12 @@
-"""Test of investigators"""
+"""Test of investigators."""
 
+# ruff: noqa: S101, PLR2004
 import pytest
-
 from coc_gen import get_investgator_class
 
 
-def test_coc_char():
-    """Very basic tests of investigator creation"""
+def test_coc_char() -> None:
+    """Very basic tests of investigator creation."""
     char = get_investgator_class("coc_swe")()
 
     assert isinstance(char.name, str)
@@ -337,7 +337,8 @@ def test_coc_char():
         },
     ],
 )
-def test_char_from_to_dict(char_dict):
-    CharClass = get_investgator_class("coc_swe")
+def test_char_from_to_dict(char_dict: dict) -> None:
+    """Verify that as_dict() reverses from_dict()."""
+    CharClass = get_investgator_class("coc_swe")  # noqa: N806
     new_dict = CharClass.from_dict(char_dict).as_dict
     assert new_dict == char_dict

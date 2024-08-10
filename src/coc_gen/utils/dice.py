@@ -1,19 +1,17 @@
-"""
-Simple dice rolling utilities
-"""
+"""Simple dice rolling utilities."""
 
 from random import randint
 
 
 def roll(dice: str) -> int:
-    """
-    roll some dice
+    """Roll some dice.
 
-    Arguments:
-        dice {str} -- What to roll on the format "3D6+3
+    Args:
+        dice (str) : What to roll on the format "3D6+3
 
     Returns:
-        str -- a random roll
+        The vaule rolled.
+
     """
     if "+" in dice:
         dice, addition = dice.split("+")
