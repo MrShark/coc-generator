@@ -1,4 +1,4 @@
-"""Ruleset for Call of ­Cthulhu Sverige"""
+"""Ruleset for Call of ­Cthulhu Sverige."""
 
 from coc_gen.base_classes import Investigator, Occupation
 
@@ -46,9 +46,7 @@ special_skills = {
 
 
 class SweOccupation(Occupation):
-    """
-    An Occupation
-    """
+    """An Occupation."""
 
     _skills = skills
     _special_skills = special_skills
@@ -66,9 +64,7 @@ for name, data in occupations_data.items():
 
 
 class SweInvestigator(Investigator):
-    """
-    An Investigator in Call of Cathulu Sverige
-    """
+    """An Investigator in Call of Cathulu Sverige."""
 
     _occupations = occupations
     _skills = skills

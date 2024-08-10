@@ -6,28 +6,34 @@ Reference
     :backlinks: none
 
 
-coc_gen.investigator
+coc_gen
+-------
+
+.. automodule:: coc_gen
+   :members:
+   :special-members: __init__
+
+coc_gen.base_classes
 --------------------
 
-.. automodule:: coc_gen.investigator
+.. automodule:: coc_gen.base_classes
    :members:
    :special-members: __init__
 
+coc_gen.cli
+-----------
 
-coc_gen.dice
-------------
-
-.. automodule:: coc_gen.dice
+.. automodule:: coc_gen.cli
    :members:
 
+coc_gen.coc_swe
+---------------
 
-coc_gen.data.skills
--------------------
-.. automodule:: coc_gen.data.skills
+.. automodule:: coc_gen.coc_swe
    :members:
 
-coc_gen.data.occupations
-------------------------
-.. automodule:: coc_gen.data.occupations
+coc_gen.coc_eng
+---------------
+
+.. automodule:: coc_gen.coc_eng
    :members:
-   :special-members: __init__

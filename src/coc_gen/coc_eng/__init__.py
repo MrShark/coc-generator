@@ -1,4 +1,4 @@
-"""Rulesets for Call of ­Cthulhu clasic and modern"""
+"""Rulesets for Call of ­Cthulhu clasic and modern."""
 
 from coc_gen.base_classes import Investigator, Occupation
 from coc_gen.coc_eng.occupations import occupations_20s_data, occupations_modern_data
@@ -59,9 +59,7 @@ special_skills_modern = {
 
 
 class TwentiesOccupation(Occupation):
-    """
-    An Occupation in the Classic setting
-    """
+    """An Occupation in the Classic setting."""
 
     _skills = skills_20s
     _special_skills = special_skills_20s
@@ -79,9 +77,7 @@ for name, data in occupations_20s_data.items():
 
 
 class TwentiesInvestigator(Investigator):
-    """
-    An Investigator in Call of Cathulu Sverige
-    """
+    """An Investigator in Call of Cathulu Sverige."""
 
     _occupations = occupations_20s
     _skills = skills_20s
@@ -90,7 +86,7 @@ class TwentiesInvestigator(Investigator):
 
 
 class ModernOccupation(Occupation):
-    """An Occupation in a modern setting"""
+    """An Occupation in a modern setting."""
 
     _skills = skills_modern
     _special_skills = special_skills_modern
@@ -108,9 +104,7 @@ for name, data in occupations_modern_data.items():
 
 
 class ModernInvestigator(Investigator):
-    """
-    An Investigator in Call of Cathulu Sverige
-    """
+    """An Investigator in Call of Cathulu Sverige."""
 
     _occupations = occupations_modern
     _skills = skills_modern
@@ -122,8 +116,8 @@ if __name__ == "__main__":
     for o in occupations_20s_data.values():
         for s in o["skills"]:
             if s not in skills_20s and s not in special_skills_20s:
-                print(s)
+                print(s)  # noqa: T201
     for o in occupations_modern_data.values():
         for s in o["skills"]:
             if s not in skills_modern and s not in special_skills_modern:
-                print(s)
+                print(s)  # noqa: T201

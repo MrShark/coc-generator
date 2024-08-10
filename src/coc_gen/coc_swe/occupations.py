@@ -1,4 +1,4 @@
-"""A list of occupations for Call ­Cthulhu Sverige"""
+"""A list of occupations for Call ­Cthulhu Sverige."""
 
 occupations_data = {
     "Agitator": {

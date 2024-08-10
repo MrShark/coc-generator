@@ -1,8 +1,10 @@
-"""Base classes that can be specialised to implement different rulesets"""
+"""Base classes that can be specialised to implement different rulesets."""
+
+from __future__ import annotations
 
 from functools import total_ordering
 from random import choice, randint, random
-from typing import Any
+from typing import ClassVar
 
 from faker import Faker
 
@@ -10,35 +12,40 @@ from .utils import dice
 
 
 class Skill:
-    """
-    A CoC skill, with name and a default value
-    """
+    """A CoC skill, with name and a default value."""
 
     def __init__(self, name: str, default_value: str) -> None:
+        """Create a Skill.
+
+        Args:
+            name (str): Name of the skill
+            default_value (str): A string describing the default value of the skill.
+                                 See instance_value() for format of the string
+        """
         self.name = name
         self.default_value = default_value
 
-    def get_value(self, value: int) -> "SkillValue":
-        """
-        Get a specific skill value
+    def get_value(self, value: int) -> SkillValue:
+        """Get a specific skill value.
 
-        Arguments:
-            value {int} -- the specific value to get
+        Args:
+            value (int) : the specific value to get
 
         Returns:
-            SkillValue -- The skill value
+            SkillValue : The skill value
+
         """
         return SkillValue(self, value)
 
-    def instance_value(self, base_values: dict[str, int]) -> "SkillValue":
-        """
-        Instanciate a default value for the skill.
+    def instance_value(self, base_values: dict[str, int]) -> SkillValue:
+        """Instanciate a default value for the skill.
 
-        Arguments:
-            base_values {dict[str, int]} -- Base values to use for the calculation of the default value
+        Args:
+            base_values (dict[str, int]) : Base values to use for the calculation of the default value
 
         Returns:
-            SkillValue -- the skill value
+            SkillValue : The skill value
+
         """
         if self.default_value.endswith("%"):
             return SkillValue(self, int(self.default_value[:-1]))
@@ -52,79 +59,85 @@ class Skill:
 
 @total_ordering
 class SkillValue:
-    """
-    A specific value of a skill.
+    """A specific value of a skill.
+
     The skill can be accessed via skill and the value via value
-    It is ordered via the value
-    It supports addidtion and subtraction with other SkillValue:s and integers.
+    It is ordered via the value (also against integers)
+    It supports addition and subtraction with other SkillValue:s and integers.
     """
 
     def __init__(self, skill: Skill, value: int) -> None:
+        """Create a specific value for a skill.
+
+        Args:
+            skill (Skill): The skill
+            value (int): The value
+        """
         self.skill = skill
         self.value = value
 
     @property
     def half_value(self) -> int:
-        """
-        the half value
+        """The half value.
 
         Returns:
-            int -- the half value
+            int : the half value
+
         """
         return int(self.value / 2)
 
     @property
     def fifth_value(self) -> int:
-        """
-        the fifth value
+        """The fifth value.
 
         Returns:
-            int -- the fifth value
+            int : the fifth value
+
         """
         return int(self.value / 5)
 
-    def __add__(self, other):
+    def __add__(self, other) -> SkillValue:  # noqa: ANN001, D105
         if hasattr(other, "value"):
             return self.__class__(self.skill, self.value + other.value)
         if isinstance(other, (int, float)):
             return self.__class__(self.skill, self.value + int(other))
 
-        raise TypeError("Unsupported operand type(s) for +")
+        msg = "Unsupported operand type(s) for +"
+        raise TypeError(msg)
 
-    def __sub__(self, other):
+    def __sub__(self, other) -> SkillValue:  # noqa: ANN001, D105
         if hasattr(other, "value"):
             return self.__class__(self.skill, self.value - other.value)
         if isinstance(other, (int, float)):
             return self.__class__(self.skill, self.value - int(other))
 
-        raise TypeError("Unsupported operand type(s) for -")
+        msg = "Unsupported operand type(s) for -"
+        raise TypeError(msg)
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:  # noqa: ANN001, D105
         if isinstance(other, (int, float)):
             return self.value == other
         if hasattr(other, "value"):
             return self.value == other.value
         return NotImplemented
 
-    def __lt__(self, other):
+    def __lt__(self, other) -> bool:  # noqa: ANN001, D105
         if isinstance(other, (int, float)):
             return self.value < other
         if hasattr(other, "value"):
             return self.value < other.value
         return NotImplemented
 
-    def __repr__(self) -> str:
+    def __repr__(self) -> str:  # noqa: D105
         return f"{self.value}"
 
 
 class Occupation:
-    """
-    An Occupation
-    """
+    """An Occupation."""
 
-    _special_skills = {}
-    _skills = {}
-    _basevalues = {}
+    _special_skills: ClassVar = {}
+    _skills: ClassVar = {}
+    _basevalues: ClassVar = {}
 
     def __init__(
         self,
@@ -133,37 +146,35 @@ class Occupation:
         credit_range: tuple[int, int],
         occupation_skills: list[str],
     ) -> None:
-        """
-        Create an Occupation
+        """Create an Occupation.
 
-        Arguments:
-            name {str} -- Name of the occupation
-            skill_points {str} -- The number of skill points the Occupation gets
+        Args:
+            name (str) : Name of the occupation
+            skill_points (str) : The number of skill points the Occupation gets
                 (for syntax see calc_skillpoints())
-            credit_range {tuple[int,int]} -- Min and max credit range for the occupation
-            occupation_skills {list(str)} -- list of possible skill
-        """
+            credit_range (tuple[int,int]) : Min and max credit range for the occupation
+            occupation_skills (list[str]) : list of possible skill
 
+        """
         self.name = name
         self.skill_points = skill_points
         self.credit_range = credit_range
         self.occupation_skills = occupation_skills
 
     def calc_skillpoint(self, basevalues: dict[str, int]) -> int:
-        """
-        Calculate the skillpoint for this occupation with the given
-        base values.
+        """Calculate the skillpoint for this occupation with the given base values.
 
         The syntax of the occupations skill point settings are something like:
             "UTB×2+STY×2" or "UTB×4" ie. multiplication of a base values with
             integers and then optional addition addition
 
-        Arguments:
-            basevalues {dict[str,int]} -- the base values of the character that
+        Args:
+            basevalues (dict[str,int]) : The base values of the character that
                 have the occupation.
 
         Returns:
-            int -- the calculated skill points
+            int : the calculated skill points
+
         """
         skill_points = []
         for alt in self.skill_points.split("|"):
@@ -176,15 +187,15 @@ class Occupation:
         return max(skill_points)
 
     def get_skill_instance(self) -> list[Skill]:
-        """
-        Get a instance of skills for the occupation
+        """Get a instance of skills for the occupation.
 
         Any skills that are a key to the special_skills dictionary
         are replaced with a random skill from the keys item.
         The returned skills are in a random order.
 
         Returns:
-            list[str] -- _description_
+            list[str] : _description_
+
         """
         inst = set()
         for skill in self.occupation_skills:
@@ -193,44 +204,43 @@ class Occupation:
             else:
                 inst.add(self._skills[skill])
 
-        return sorted(inst, key=lambda x: random())
+        return sorted(inst, key=lambda x: random())  # noqa: ARG005
 
-    def __repr__(self) -> str:
+    def __repr__(self) -> str:  # noqa: D105
         return f"Occupation('{self.name}')"
 
 
 class Investigator:
-    """
-    An Investigator.
+    """An Investigator.
 
     See __init__() for creation options
     """
 
-    _occupations: list[Occupation] = {}
-    _skills = {}
-    _credit_rating = "Credit Rating"
-    _basevalues = {}
+    _occupations: ClassVar[list[Occupation]] = {}
+    _skills: ClassVar = {}
+    _credit_rating: ClassVar[str] = "Credit Rating"
+    _basevalues: ClassVar = {}
 
-    def __init__(
+    def __init__(  # noqa: C901, PLR0912, PLR0913
         self,
-        locale=None,
-        sex=None,
-        name=None,
-        basevalues=None,
-        occupation=None,
-        skills=None,
+        locale: str | None = None,
+        sex: str | None = None,
+        name: str | None = None,
+        basevalues: dict[str, int] | None = None,
+        occupation: str | None = None,
+        skills: dict[str, int] | None = None,
     ) -> None:
-        """
-        Create an Investigator
+        """Create an Investigator.
 
-        Keyword Arguments:
-            locale {str} -- The locale the Investigator is active in.
+        Args:
+            locale (str, optional): The locale the Investigator is active in.
                 Sent to Faker that is used to create their name.
-                More info: https://faker.readthedocs.io/en/stable/#localization  (default: {None})
-            sex {"M"/"F"} -- Sex of the Investigator, if None random (default: {None})
-            name {str} -- Name of the Investigator, if None random according to the locale (default: {None})
-            basevalues {dict[str,int]} -- Basevalues of the Investigator, if None random (default: {None})
-            occupation {str} -- Occupation of the Investigator, if None random (default: {None})
+                More info: https://faker.readthedocs.io/en/stable/#localization. Defaults to None.
+            sex (str, optional): Sex of the Investigator, if None random. Defaults to None.
+            name (str, optional): Name of the Investigator, if None random according to the locale. Defaults to None.
+            basevalues (dict[str,int], optional): Basevalues of the Investigator, if None random. Defaults to None.
+            occupation (str, optional): Occupation of the Investigator, if None random. Defaults to None.
+            skills (dict[str,int], optional): _description_. Defaults to None.
         """
         self.fake = Faker(locale=locale)
 
@@ -241,12 +251,11 @@ class Investigator:
 
         if name:
             self.name = name
+        elif self.sex == "F":
+            self.name = f"{self.fake.first_name_female()} {self.fake.last_name()}"
         else:
-            if self.sex == "F":
-                self.name = f"{self.fake.first_name_female()} {self.fake.last_name()}"
-            else:
-                self.name = f"{self.fake.first_name_male()} {self.fake.last_name()}"
-            # TODO this does not work in locales dont follow the first/last naming convention
+            self.name = f"{self.fake.first_name_male()} {self.fake.last_name()}"
+            # TODO: this does not work in locales dont follow the first/last naming convention
 
         if basevalues is None:
             basevalues = {}
@@ -262,9 +271,11 @@ class Investigator:
 
         if not skills:
             skill_points = self.occupation.calc_skillpoint(self.basevalues)
+
             credit_val = randint(*self.occupation.credit_range)
-            credit = self.occupation._skills[self._credit_rating].get_value(credit_val)
+            credit = self._skills[self._credit_rating].get_value(credit_val)
             self.skills = {self._credit_rating: credit}
+
             skill_points -= credit_val
 
             for skill in self.occupation.get_skill_instance():
@@ -275,7 +286,7 @@ class Investigator:
 
             while skill_points:
                 skill = choice(list(self.skills.keys()))
-                if self.skills[skill] < 100:
+                if self.skills[skill] < 100:  # noqa: PLR2004
                     self.skills[skill] += 1
                     skill_points -= 1
         else:
@@ -283,12 +294,12 @@ class Investigator:
             for skill, value in skills.items():
                 self.skills[skill] = SkillValue(self._skills[skill], value)
 
-    def __getattr__(self, name: str) -> Any:
+    def __getattr__(self, name: str) -> int:  # noqa: D105
         if name in self.basevalues:
             return self.basevalues[name]
-        raise AttributeError()
+        raise AttributeError
 
-    def __repr__(self) -> str:
+    def __repr__(self) -> str:  # noqa: D105
         return f"""Investigator(
     name = '{self.name}',
     sex = '{self.sex}',
@@ -299,17 +310,29 @@ class Investigator:
 
     @property
     def as_dict(self) -> dict:
-        investigator = {
+        """Return a dict that describes the investigator, sutable to use in from_dict().
+
+        Returns:
+            dict -- _description_
+        """
+        return {
             "sex": self.sex,
             "name": self.name,
             "basevalues": self.basevalues,
             "occupation": self.occupation.name,
             "skills": self.skills,
         }
-        return investigator
 
     @classmethod
-    def from_dict(cls, d: dict) -> "Investigator":
+    def from_dict(cls, d: dict) -> Investigator:
+        """Create an investigator from a dict in the format returned by as_dict().
+
+        Args:
+            d (dict) : The dict
+
+        Returns:
+            Investigator -- The investigator
+        """
         return cls(
             sex=d["sex"],
             name=d["name"],
