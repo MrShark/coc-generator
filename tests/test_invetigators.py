@@ -2,6 +2,7 @@
 
 # ruff: noqa: S101, PLR2004
 import pytest
+
 from coc_gen import get_investgator_class
 
 
