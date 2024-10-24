@@ -113,7 +113,7 @@ def test_coc_char() -> None:
                 "UTB": 80,
                 "VST": 60,
             },
-            "occupation": "Betjänt/Hembiträde",
+            "occupation": "Betjänt-Hembiträde",
             "skills": {
                 "Levnadsstandard": 33,
                 "Psykologi": 42,
@@ -142,7 +142,7 @@ def test_coc_char() -> None:
                 "UTB": 40,
                 "VST": 55,
             },
-            "occupation": "Bartender/Krögare",
+            "occupation": "Bartender-Krögare",
             "skills": {
                 "Levnadsstandard": 29,
                 "Överlevnad (Berg)": 83,
@@ -219,7 +219,7 @@ def test_coc_char() -> None:
                 "UTB": 65,
                 "VST": 70,
             },
-            "occupation": "Redaktör/Förläggare",
+            "occupation": "Redaktör-Förläggare",
             "skills": {
                 "Levnadsstandard": 47,
                 "Konst & hantverk (Författare)": 34,
