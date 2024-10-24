@@ -4,6 +4,7 @@
 from random import randint
 
 import pytest
+
 from coc_gen.utils.dice import roll
 
 

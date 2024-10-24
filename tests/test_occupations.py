@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import pytest
+
 from coc_gen.base_classes import Occupation
 
 
