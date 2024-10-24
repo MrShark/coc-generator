@@ -70,3 +70,4 @@ class SweInvestigator(Investigator):
     _skills = skills
     _basevalues = basevalues
     _credit_rating = "Levnadsstandard"
+    _combat_base = ("STY", "STO")

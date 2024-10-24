@@ -77,12 +77,13 @@ for name, data in occupations_20s_data.items():
 
 
 class TwentiesInvestigator(Investigator):
-    """An Investigator in Call of Cathulu Sverige."""
+    """An Investigator in Call of Cathulu set in the twenties."""
 
     _occupations = occupations_20s
     _skills = skills_20s
     _basevalues = basevalues
     _credit_rating = "Credit Rating"
+    _combat_base = ("STR", "SIZ")
 
 
 class ModernOccupation(Occupation):
@@ -104,12 +105,13 @@ for name, data in occupations_modern_data.items():
 
 
 class ModernInvestigator(Investigator):
-    """An Investigator in Call of Cathulu Sverige."""
+    """An Investigator in Call of Cathulu set in the modern era."""
 
     _occupations = occupations_modern
     _skills = skills_modern
     _basevalues = basevalues
     _credit_rating = "Credit Rating"
+    _combat_base = ("STR", "SIZ")
 
 
 if __name__ == "__main__":
