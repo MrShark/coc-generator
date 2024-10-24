@@ -87,7 +87,7 @@ occupations_data = {
             "Värdering",
         ),
     },
-    "Betjänt/Hembiträde": {
+    "Betjänt-Hembiträde": {
         "skill_points": "UTB×2+KAR×2",
         "credit_range": (9, 35),
         "skills": (
@@ -144,7 +144,7 @@ occupations_data = {
             "RANDOM",
         ),
     },
-    "Bartender/Krögare": {
+    "Bartender-Krögare": {
         "skill_points": "UTB×2+KAR×2",
         "credit_range": (8, 30),
         "skills": (
@@ -221,7 +221,7 @@ occupations_data = {
             "RANDOM",
         ),
     },
-    "Dräng/Piga/Statare": {
+    "Dräng-Piga-Statare": {
         "skill_points": "UTB×2+STY×2",
         "credit_range": (1, 9),
         "skills": (
@@ -628,7 +628,7 @@ occupations_data = {
             "RANDOM",
         ),
     },
-    "Redaktör/Förläggare": {
+    "Redaktör-Förläggare": {
         "skill_points": "UTB×4",
         "credit_range": (25, 60),
         "skills": (
