@@ -1,12 +1,12 @@
-# To get started with Dependabot version updates, you'll need to specify which
-# package ecosystems to update and where the package manifests are located.
-
 version: 2
 updates:
   - package-ecosystem: "pip"
-    directory: "/" # Location of package manifests
+    directory: "/"
     schedule:
       interval: "weekly"
+      day: "friday"
+    commit-message:
+      prefix: "chore: "
     reviewers:
       - "MrShark"
     groups:
@@ -18,5 +18,8 @@ updates:
     directory: "/" # Location of package manifests
     schedule:
       interval: "weekly"
+      day: "friday"
+    commit-message:
+      prefix: "chore: "
     reviewers:
       - "MrShark"
