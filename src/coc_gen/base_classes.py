@@ -309,6 +309,42 @@ class Investigator:
 )"""
 
     @property
+    def damage_bonus(self) -> str:
+        """The damage bonus of the investigator.
+
+        Returns:
+            str: A dice or static value
+        """
+        val = self.basevalues[self._combat_base[0]] + self.basevalues[self._combat_base[1]]
+        if val <= 64:  # noqa: PLR2004
+            return "-2"
+        if val <= 84:  # noqa: PLR2004
+            return "-1"
+        if val <= 124:  # noqa: PLR2004
+            return "0"
+        if val <= 164:  # noqa: PLR2004
+            return "1D4"
+        return "1D6"
+
+    @property
+    def build(self) -> int:
+        """The build of the investigator.
+
+        Returns:
+            int: a static value
+        """
+        val = self.basevalues[self._combat_base[0]] + self.basevalues[self._combat_base[1]]
+        if val <= 64:  # noqa: PLR2004
+            return -2
+        if val <= 84:  # noqa: PLR2004
+            return -1
+        if val <= 124:  # noqa: PLR2004
+            return 0
+        if val <= 164:  # noqa: PLR2004
+            return 1
+        return 2
+
+    @property
     def as_dict(self) -> dict:
         """Return a dict that describes the investigator, sutable to use in from_dict().
 

@@ -1,6 +1,8 @@
 """Test of investigators."""
 
 # ruff: noqa: S101, PLR2004
+from __future__ import annotations
+
 import pytest
 
 from coc_gen import get_investgator_class
@@ -19,6 +21,25 @@ def test_coc_char() -> None:
     assert 15 <= char.INT <= 90
     assert 15 <= char.VST <= 90
     assert 15 <= char.UTB <= 90
+
+
+@pytest.mark.parametrize(
+    ("ruleset", "base_values", "build", "damage_bonus"),
+    [
+        ("coc_swe", {"STY": 65, "STO": 60}, 1, "1D4"),
+        ("coc_swe", {"STY": 60, "STO": 65}, 1, "1D4"),
+        ("coc_swe", {"STY": 60, "STO": 60}, 0, "0"),
+        ("coc_swe", {"STY": 15, "STO": 40}, -2, "-2"),
+        ("coc_20", {"STR": 65, "SIZ": 60}, 1, "1D4"),
+        ("coc_modern", {"STR": 65, "SIZ": 60}, 1, "1D4"),
+    ],
+)
+def test_combat_values(ruleset: str, base_values: dict[str, int], build: int, damage_bonus: str) -> None:
+    """Tests of combat values."""
+    investigator = get_investgator_class(ruleset)(basevalues=base_values)
+
+    assert investigator.build == build
+    assert investigator.damage_bonus == damage_bonus
 
 
 @pytest.mark.parametrize(
