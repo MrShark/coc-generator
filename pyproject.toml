@@ -9,7 +9,7 @@ packages = [{ include = "coc_gen", from = "src" }]
 
 [tool.poetry.dependencies]
 python = "^3.10"
-faker = "^35.2.0"
+faker = "^36.1.1"
 click = "^8.1.8"
 
 
