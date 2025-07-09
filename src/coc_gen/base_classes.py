@@ -131,6 +131,9 @@ class SkillValue:
     def __repr__(self) -> str:  # noqa: D105
         return f"{self.value}"
 
+    def __hash__(self) -> int:  # noqa: D105
+        return hash(f"{self.value}")
+
 
 class Occupation:
     """An Occupation."""
