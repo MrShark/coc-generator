@@ -1,6 +1,6 @@
 """Test for occupations."""
 
-# ruff: noqa: S101, PLR2004
+# ruff: noqa: S101
 from __future__ import annotations
 
 import pytest
