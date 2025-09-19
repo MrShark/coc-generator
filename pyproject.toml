@@ -9,8 +9,8 @@ packages = [{ include = "coc_gen", from = "src" }]
 
 [tool.poetry.dependencies]
 python = "^3.10"
-faker = "^37.5.3"
-click = "^8.2.1"
+faker = "^37.8.0"
+click = "^8.3.0"
 
 
 [tool.poetry.group.dev.dependencies]
