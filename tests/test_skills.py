@@ -1,6 +1,6 @@
 """Test Skill related classes."""
 
-# ruff: noqa: S101, PLR2004
+# ruff: noqa: PLR2004
 
 from coc_gen.base_classes import Skill, SkillValue
 
