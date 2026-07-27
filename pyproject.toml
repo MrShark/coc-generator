@@ -36,20 +36,29 @@ line-length = 120
 [tool.ruff.lint]
 select = ["ALL"]
 ignore = [
-    "S311",  # This is not crypto code
-    "FIX",   # To do annotations are allowed
-    "TD002", # To do annotations are allowed
-    "TD003", # To do annotations are allowed
-    "COM",   # Not recomended with auto formating
-    "D206",  # Not recomended with auto formating
-    "D300",  # Not recomended with auto formating
-    "E111",  # Not recomended with auto formating
-    "E114",  # Not recomended with auto formating
-    "E117",  # Not recomended with auto formating
-    "ISC",   # Not recomended with auto formating
-    "Q",     # Not recomended with auto formating
-    "W191",  # Not recomended with auto formating
+    "S311",   # This is not crypto code
+    "FIX",    # To do annotations are allowed
+    "TD002",  # To do annotations are allowed
+    "TD003",  # To do annotations are allowed
+    "COM",    # Not recomended with auto formating
+    "D206",   # Not recomended with auto formating
+    "D300",   # Not recomended with auto formating
+    "E111",   # Not recomended with auto formating
+    "E114",   # Not recomended with auto formating
+    "E117",   # Not recomended with auto formating
+    "ISC",    # Not recomended with auto formating
+    "Q",      # Not recomended with auto formating
+    "W191",   # Not recomended with auto formating
+    "CPY001", # No need for copyright header in this project
 ]
 allowed-confusables = ["×"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = [
+    "S101",   # assert used: required by pytest's assertion style.
+    "ARG001", # Unused function argument: pytest fixtures are often unused.
+    "ARG002", # Unused method argument: same reasoning as ARG001.
+]
+
 [tool.ruff.lint.pydocstyle]
 convention = "google"

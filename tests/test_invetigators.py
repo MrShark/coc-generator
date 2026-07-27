@@ -1,6 +1,6 @@
 """Test of investigators."""
 
-# ruff: noqa: S101, PLR2004
+# ruff: noqa: PLR2004
 from __future__ import annotations
 
 import pytest

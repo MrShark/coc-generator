@@ -1,6 +1,5 @@
 """Tests for the coc_gen.dice module."""
 
-# ruff: noqa: S101
 from random import randint
 
 import pytest

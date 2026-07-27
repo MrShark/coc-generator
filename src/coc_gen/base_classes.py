@@ -224,7 +224,7 @@ class Investigator:
     _credit_rating: ClassVar[str] = "Credit Rating"
     _basevalues: ClassVar = {}
 
-    def __init__(  # noqa: C901, PLR0912, PLR0913
+    def __init__(  # noqa: C901, PLR0912, PLR0913, PLR0917
         self,
         locale: str | None = None,
         sex: str | None = None,
