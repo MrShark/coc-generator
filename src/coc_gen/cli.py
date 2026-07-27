@@ -54,4 +54,4 @@ def investigator(
     """
     investigater_class = get_investgator_class(ruleset)
     for _ in range(number):
-        print(investigater_class(locale=locale, sex=sex, occupation=occupation))  # noqa: T201
+        print(investigater_class(locale=locale, sex=sex, occupation=occupation).as_markdown())  # noqa: T201
