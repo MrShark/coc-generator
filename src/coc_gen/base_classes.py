@@ -362,6 +362,35 @@ class Investigator:
             "skills": self.skills,
         }
 
+    def as_markdown(self) -> str:
+        """Return a markdown representation of the investigator.
+
+        Includes name, occupation, sex, basevalues (table) and skills (table sorted alphabetically).
+        """
+        parts: list[str] = []
+        parts.append(f"# {self.name}")
+        parts.append("")
+        parts.append(f"- **Occupation:** {self.occupation.name}")
+        parts.append(f"- **Sex:** {self.sex}")
+        parts.append("")
+        parts.append("## Base Values")
+        parts.append("")
+        parts.append("| Base | Value |")
+        parts.append("|---|---:|")
+        for k in sorted(self.basevalues.keys(), key=lambda x: x.lower()):
+            parts.append(f"| {k} | {self.basevalues[k]} |")  # noqa: PERF401
+        parts.append("")
+        parts.append("## Skills")
+        parts.append("")
+        parts.append("| Skill | Value |")
+        parts.append("|---|---:|")
+        for skill in sorted(self.skills.keys(), key=lambda x: x.lower()):
+            val = self.skills[skill]
+            v = getattr(val, "value", val)
+            parts.append(f"| {skill} | {v} |")
+        parts.append("")
+        return "\n".join(parts)
+
     @classmethod
     def from_dict(cls, d: dict) -> Investigator:
         """Create an investigator from a dict in the format returned by as_dict().
