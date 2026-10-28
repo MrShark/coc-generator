@@ -3,26 +3,16 @@ updates:
   - package-ecosystem: "pip"
     directory: "/"
     schedule:
-      interval: "daily"
-    commit-message:
-      prefix: "security: "
-    reviewers:
-      - "MrShark"
-    groups:
-      production-dependencies:
-        applies-to: security-updates
-        dependency-type: "production"
-
-  - package-ecosystem: "pip"
-    directory: "/"
-    schedule:
       interval: "monthly"
       day: "friday"
     commit-message:
       prefix: "chore: "
-    reviewers:
+    assignees:
       - "MrShark"
     groups:
+      security-production-dependencies:
+        applies-to: security-updates
+        dependency-type: "production"
       production-dependencies:
         dependency-type: "production"
       development-dependencies:
@@ -31,9 +21,9 @@ updates:
   - package-ecosystem: "github-actions"
     directory: "/" # Location of package manifests
     schedule:
-      interval: "weekly"
+      interval: "monthly"
       day: "friday"
     commit-message:
       prefix: "chore: "
-    reviewers:
+    assignees:
       - "MrShark"
