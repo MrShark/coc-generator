@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from functools import total_ordering
-from random import choice, randint, random
+from random import betavariate, choice, randint, random
 from typing import ClassVar
 
 from faker import Faker
@@ -224,14 +224,18 @@ class Investigator:
     _credit_rating: ClassVar[str] = "Credit Rating"
     _basevalues: ClassVar = {}
 
-    def __init__(  # noqa: C901, PLR0912, PLR0913, PLR0917
+    def __init__(  # noqa: C901, PLR0912, PLR0913, PLR0915
         self,
         locale: str | None = None,
+        *,
         sex: str | None = None,
         name: str | None = None,
         basevalues: dict[str, int] | None = None,
         occupation: str | None = None,
         skills: dict[str, int] | None = None,
+        age: int | None = None,
+        hometown: str | None = None,
+        birthtown: str | None = None,
     ) -> None:
         """Create an Investigator.
 
@@ -244,8 +248,25 @@ class Investigator:
             basevalues (dict[str,int], optional): Basevalues of the Investigator, if None random. Defaults to None.
             occupation (str, optional): Occupation of the Investigator, if None random. Defaults to None.
             skills (dict[str,int], optional): _description_. Defaults to None.
+            age (int, optional): Age of the Investigator, if None random. Defaults to None.
+            hometown (str, optional): Hometown of the Investigator, if None random. Defaults to None.
+            birthtown (str, optional): Birth town of the Investigator, if None random. Defaults to None.
         """
         self.fake = Faker(locale=locale)
+        if age is not None:
+            self.age = age
+        else:
+            self.age = int(betavariate(2, 3.8) * 50 + 20)
+        if hometown is not None:
+            self.hometown = hometown
+        else:
+            self.hometown = self.fake.city()
+        if birthtown is not None:
+            self.birthtown = birthtown
+        elif random() < 0.5:  # noqa: PLR2004
+            self.birthtown = self.fake.city()
+        else:
+            self.birthtown = self.hometown
 
         if sex in ("F", "M"):
             self.sex = sex
@@ -357,6 +378,9 @@ class Investigator:
         return {
             "sex": self.sex,
             "name": self.name,
+            "age": self.age,
+            "hometown": self.hometown,
+            "birthtown": self.birthtown,
             "basevalues": self.basevalues,
             "occupation": self.occupation.name,
             "skills": self.skills,
@@ -372,6 +396,9 @@ class Investigator:
         parts.append("")
         parts.append(f"- **Occupation:** {self.occupation.name}")
         parts.append(f"- **Sex:** {self.sex}")
+        parts.append(f"- **Age:** {self.age}")
+        parts.append(f"- **Hometown:** {self.hometown}")
+        parts.append(f"- **Birthtown:** {self.birthtown}")
         parts.append("")
         parts.append("## Base Values")
         parts.append("")
@@ -407,4 +434,7 @@ class Investigator:
             basevalues=d["basevalues"],
             occupation=d["occupation"],
             skills=d["skills"],
+            age=d.get("age"),
+            hometown=d.get("hometown"),
+            birthtown=d.get("birthtown"),
         )

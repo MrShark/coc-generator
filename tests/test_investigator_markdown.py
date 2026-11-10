@@ -28,6 +28,9 @@ def test_as_markdown_contains_sections_and_tables() -> None:
             "Arkeologi": 3,
             "Bibliotekskunskap": 20,
         },
+        "age": 30,
+        "hometown": "Stockholm",
+        "birthtown": "Göteborg",
     }
 
     inv = concrete_class.from_dict(char_dict)
@@ -36,6 +39,9 @@ def test_as_markdown_contains_sections_and_tables() -> None:
     # Basic sections
     assert f"# {char_dict['name']}" in md
     assert f"- **Occupation:** {char_dict['occupation']}" in md
+    assert f"- **Age:** {char_dict['age']}" in md
+    assert f"- **Hometown:** {char_dict['hometown']}" in md
+    assert f"- **Birthtown:** {char_dict['birthtown']}" in md
     assert "## Base Values" in md
     assert "## Skills" in md
 
