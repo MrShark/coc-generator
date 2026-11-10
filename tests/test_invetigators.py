@@ -13,6 +13,11 @@ def test_coc_char() -> None:
     char = get_investgator_class("coc_swe")()
 
     assert isinstance(char.name, str)
+    assert 20 <= char.age < 70
+    assert isinstance(char.hometown, str)
+    assert char.hometown
+    assert isinstance(char.birthtown, str)
+    assert char.birthtown
     assert 15 <= char.STY <= 90
     assert 15 <= char.FYS <= 90
     assert 15 <= char.STO <= 90
@@ -48,6 +53,9 @@ def test_combat_values(ruleset: str, base_values: dict[str, int], build: int, da
         {
             "sex": "M",
             "name": "Jacob Tyler",
+            "age": 30,
+            "hometown": "Stockholm",
+            "birthtown": "Göteborg",
             "basevalues": {
                 "FYS": 65,
                 "INT": 60,
@@ -73,6 +81,9 @@ def test_combat_values(ruleset: str, base_values: dict[str, int], build: int, da
         {
             "sex": "F",
             "name": "Megan Clark",
+            "age": 13,
+            "hometown": "Stockholm",
+            "birthtown": "Stockholm",
             "basevalues": {
                 "FYS": 60,
                 "INT": 45,
@@ -99,6 +110,9 @@ def test_combat_values(ruleset: str, base_values: dict[str, int], build: int, da
         {
             "sex": "M",
             "name": "George Hoffman",
+            "age": 45,
+            "hometown": "Lund",
+            "birthtown": "Stockholm",
             "basevalues": {
                 "FYS": 45,
                 "INT": 80,
@@ -124,6 +138,9 @@ def test_combat_values(ruleset: str, base_values: dict[str, int], build: int, da
         {
             "sex": "F",
             "name": "Leah Martin",
+            "age": 39,
+            "hometown": "North Stevenmouth",
+            "birthtown": "West Tylerview",
             "basevalues": {
                 "FYS": 40,
                 "INT": 80,
@@ -153,6 +170,9 @@ def test_combat_values(ruleset: str, base_values: dict[str, int], build: int, da
         {
             "sex": "F",
             "name": "Erin Price",
+            "age": 54,
+            "hometown": "Nousiainen",
+            "birthtown": "Korsnäs",
             "basevalues": {
                 "FYS": 55,
                 "INT": 45,
@@ -179,6 +199,9 @@ def test_combat_values(ruleset: str, base_values: dict[str, int], build: int, da
         {
             "sex": "F",
             "name": "Melissa Martin",
+            "age": 46,
+            "hometown": "横浜市戸塚区",
+            "birthtown": "横浜市神奈川区",
             "basevalues": {
                 "FYS": 75,
                 "INT": 85,
@@ -204,6 +227,9 @@ def test_combat_values(ruleset: str, base_values: dict[str, int], build: int, da
         {
             "sex": "M",
             "name": "Dustin Compton",
+            "age": 30,
+            "hometown": "Robertport",
+            "birthtown": "Robertport",
             "basevalues": {
                 "FYS": 50,
                 "INT": 80,
@@ -230,6 +256,9 @@ def test_combat_values(ruleset: str, base_values: dict[str, int], build: int, da
         {
             "sex": "F",
             "name": "Tiffany Blair",
+            "age": 27,
+            "hometown": "Pattersonhaven",
+            "birthtown": "Samanthaborough",
             "basevalues": {
                 "FYS": 50,
                 "INT": 65,
@@ -256,6 +285,9 @@ def test_combat_values(ruleset: str, base_values: dict[str, int], build: int, da
         {
             "sex": "M",
             "name": "John Eaton",
+            "age": 48,
+            "hometown": "Kalmar",
+            "birthtown": "Kalmar",
             "basevalues": {
                 "FYS": 50,
                 "INT": 75,
@@ -282,6 +314,9 @@ def test_combat_values(ruleset: str, base_values: dict[str, int], build: int, da
         {
             "sex": "M",
             "name": "James Williams",
+            "age": 32,
+            "hometown": "Östersund",
+            "birthtown": "Östersund",
             "basevalues": {
                 "FYS": 75,
                 "INT": 60,
@@ -308,6 +343,9 @@ def test_combat_values(ruleset: str, base_values: dict[str, int], build: int, da
         {
             "sex": "M",
             "name": "Jose Wallace",
+            "age": 44,
+            "hometown": "Malmö",
+            "birthtown": "Malmö",
             "basevalues": {
                 "FYS": 45,
                 "INT": 65,
@@ -334,6 +372,9 @@ def test_combat_values(ruleset: str, base_values: dict[str, int], build: int, da
         {
             "sex": "M",
             "name": "Timothy Vaughan",
+            "age": 42,
+            "birthtown": "Reynoldsberg",
+            "hometown": "Reynoldsberg",
             "basevalues": {
                 "FYS": 45,
                 "INT": 55,

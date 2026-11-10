@@ -36,12 +36,33 @@ from coc_gen import RULESETS, get_investgator_class
     type=str,
     help="The occupation of the investigator.",
 )
-def investigator(
+@click.option(
+    "--age",
+    default=None,
+    type=int,
+    help="The age of the investigator.",
+)
+@click.option(
+    "--hometown",
+    default=None,
+    type=str,
+    help="The hometown of the investigator.",
+)
+@click.option(
+    "--birthtown",
+    default=None,
+    type=str,
+    help="The birth town of the investigator.",
+)
+def investigator(  # noqa: PLR0913, PLR0917
     ruleset: str,
     locale: str,
     number: int,
     sex: str,
     occupation: str,
+    age: int | None,
+    hometown: str | None,
+    birthtown: str | None,
 ) -> None:
     """Generate Call of Cthulhu investigators.
 
@@ -51,7 +72,19 @@ def investigator(
         number (int): Number of investigators to generate.
         sex (str): The sec of the investigator.
         occupation (str): The occupation of the investigator.
+        age (int | None): The age of the investigator.
+        hometown (str | None): The hometown of the investigator.
+        birthtown (str | None): The birth town of the investigator.
     """
     investigater_class = get_investgator_class(ruleset)
     for _ in range(number):
-        print(investigater_class(locale=locale, sex=sex, occupation=occupation).as_markdown())  # noqa: T201
+        print(  # noqa: T201
+            investigater_class(
+                locale=locale,
+                sex=sex,
+                occupation=occupation,
+                age=age,
+                hometown=hometown,
+                birthtown=birthtown,
+            ).as_markdown(),
+        )
